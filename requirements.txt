@@ -1,0 +1,5 @@
+```text
+Flask==2.3.2
+transformers==4.24.0
+torch==1.13.1
+watchdog==2.1.9

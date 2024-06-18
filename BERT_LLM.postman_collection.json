@@ -1,0 +1,118 @@
+{
+	"info": {
+		"_postman_id": "31e99804-2199-472c-bf04-ba9e65a34949",
+		"name": "BERT_LLM",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "35283788"
+	},
+	"item": [
+		{
+			"name": "BERT Prediction Negative",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"text\": \"I recently visited a new cafe in town and had a wonderful experience. The ambiance was warm and inviting, and the staff were incredibly friendly and attentive. The coffee was excellent, and the pastries were fresh and delicious. However, the service was a bit slow, and it took a while for our order to be served. Additionally, the prices were on the higher side, which might be a concern for some. Despite these minor issues, I would definitely visit again for the quality of the food and the overall experience.\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/predict",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"predict"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "BERT Prediction Positive",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"text\": \"I had an amazing experience at the new restaurant in town. The food was absolutely delicious, and the service was impeccable. The staff went above and beyond to ensure we had a great time, and the ambiance was perfect for a relaxing evening. I highly recommend this place to anyone looking for a top-notch dining experience.\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/predict",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"predict"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "BERT Prediction Negative",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"text\": \"I had a terrible experience at the new restaurant in town. The food was bland and overpriced, and the service was extremely slow. The staff were rude and unhelpful, and the ambiance was noisy and uncomfortable. I would not recommend this place to anyone looking for a decent dining experience.\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/predict",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"predict"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

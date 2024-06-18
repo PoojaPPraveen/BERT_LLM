@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentiment Analysis with BERT</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Sentiment Analysis with BERT</h1>
+        <form id="sentiment-form">
+            <textarea id="input-text" placeholder="Enter text to analyze..." required></textarea>
+            <button type="submit">Analyze Sentiment</button>
+        </form>
+        <div id="result"></div>
+        <div id="error-message"></div>
+        <button id="clear-history">Clear History</button>
+        <h2>Analysis History</h2>
+        <ul id="history-list"></ul>
+    </div>
+    <script>
+        document.getElementById('sentiment-form').addEventListener('submit', async function(event) {
+            event.preventDefault();
+            const text = document.getElementById('input-text').value;
+            try {
+                const response = await fetch('/predict', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ text: text })
+                });
+                const result = await response.json();
+                if (response.ok) {
+                    document.getElementById('result').innerText = `Sentiment: ${result.sentiment}`;
+                    document.getElementById('error-message').innerText = '';
+                    updateHistory();
+                } else {
+                    throw new Error(result.error);
+                }
+            } catch (error) {
+                document.getElementById('error-message').innerText = `Error: ${error.message}`;
+            }
+        });
+
+        document.getElementById('clear-history').addEventListener('click', async function() {
+            await fetch('/clear_history', {
+                method: 'POST'
+            });
+            updateHistory();
+        });
+
+        async function updateHistory() {
+            const response = await fetch('/history');
+            const history = await response.json();
+            const historyList = document.getElementById('history-list');
+            historyList.innerHTML = '';
+            history.forEach(item => {
+                const listItem = document.createElement('li');
+                listItem.innerText = `${item.text} - Sentiment: ${item.sentiment}`;
+                historyList.appendChild(listItem);
+            });
+        }
+
+        // Initial load of history
+        updateHistory();
+    </script>
+</body>
+</html>
